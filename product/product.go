@@ -5,6 +5,6 @@ import "github.com/jinzhu/gorm"
 type Product struct {
 	gorm.Model
 
-	code  string
-	price float32
+	Code  string
+	Price float32
 }
