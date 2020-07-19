@@ -9,10 +9,12 @@ type ProductRepository struct {
 	DB *gorm.DB
 }
 
-func providePeoductRepository(DB *gorm.DB) ProductRepository{
-	return ProductRepository(DB: DB)
+func providePeoductRepository(DB *gorm.DB) ProductRepository {
+	return ProductRepository{DB: DB}
 }
 
-func (p *ProductRepository) findAll []product{
-	products := [] product
+func (p *ProductRepository) findAll() []product {
+	var products []product
+	p.DB.Find(&products)
+	return products
 }
