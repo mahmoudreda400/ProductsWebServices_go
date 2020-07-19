@@ -2,7 +2,7 @@ package product
 
 import "github.com/jinzhu/gorm"
 
-type product struct {
+type Product struct {
 	gorm.Model
 
 	code  string
