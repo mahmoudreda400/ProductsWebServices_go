@@ -12,22 +12,22 @@ type ProductAPI struct {
 	productService ProductService
 }
 
-func provideProductAPI(ps ProductService) ProductAPI {
+func ProvideProductAPI(ps ProductService) ProductAPI {
 	return ProductAPI{productService: ps}
 }
 
-func (api *ProductAPI) findAll(c *gin.Context) {
+func (api *ProductAPI) FindAll(c *gin.Context) {
 	products := api.productService.findAll()
 	c.JSON(http.StatusOK, gin.H{"products": toProductDTOs(products)})
 }
 
-func (api *ProductAPI) findByID(c *gin.Context) {
+func (api *ProductAPI) FindByID(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	product := api.productService.findByID(id)
 	c.JSON(http.StatusFound, gin.H{"product": toProductDTO(product)})
 }
 
-func (api *ProductAPI) save(c *gin.Context) {
+func (api *ProductAPI) Save(c *gin.Context) {
 	var productDTO ProductDTO
 	err := c.BindJSON(&productDTO)
 	if err != nil {
@@ -39,7 +39,7 @@ func (api *ProductAPI) save(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"product": createdProduct})
 }
 
-func (api *ProductAPI) update(c *gin.Context) {
+func (api *ProductAPI) Update(c *gin.Context) {
 	var productDTO ProductDTO
 	err := c.BindJSON(&productDTO)
 	if err != nil {
@@ -62,7 +62,7 @@ func (api *ProductAPI) update(c *gin.Context) {
 	c.Status(http.StatusOK)
 }
 
-func (api *ProductAPI) delete(c *gin.Context) {
+func (api *ProductAPI) Delete(c *gin.Context) {
 
 	id, _ := strconv.Atoi(c.Param("id"))
 	product := api.productService.findByID(id)
